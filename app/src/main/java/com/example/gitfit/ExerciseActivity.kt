@@ -24,9 +24,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
+    private var restTimerDuration: Long = 1
 
     private var exRestTimer: CountDownTimer? = null
     private var exRestProgress = 0
+    private var exTimerDuration: Long = 1
 
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition: Int = -1
@@ -47,14 +49,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+        binding?.exerciseActivityToolbar?.setNavigationOnClickListener {
+            onBackPressed()// press back button of device
+        }
 
         exerciseList = Constants.defaultExerciseList()
 
         tts = TextToSpeech(this, this)
 
-        binding?.exerciseActivityToolbar?.setNavigationOnClickListener {
-            onBackPressed()// press back button of device
-        }
 
         setupRestView()
         setupExerciseStatusRecyclerView()
@@ -126,7 +128,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         binding?.RestProgressBar?.progress = restProgress
 
-        restTimer = object : CountDownTimer(10000, 1000) {
+        restTimer = object : CountDownTimer(restTimerDuration * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.RestProgressBar?.progress = 10 - restProgress
@@ -147,7 +149,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExProgressBar() {
         binding?.exProgressBar?.progress = exRestProgress
 
-        exRestTimer = object : CountDownTimer(30000, 1000) {
+        exRestTimer = object : CountDownTimer(exTimerDuration * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 exRestProgress++
                 binding?.exProgressBar?.progress = 30 - exRestProgress
@@ -156,16 +158,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onFinish() {
 
-                exerciseList!![currentExercisePosition].setIsSelected(false)
-                exerciseList!![currentExercisePosition].setIsCompleted(true)
-                ExerciseAdapter!!.notifyDataSetChanged()
-
-
                 // If there is still exercise
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
+                    exerciseList!![currentExercisePosition].setIsSelected(false)
+                    exerciseList!![currentExercisePosition].setIsCompleted(true)
+                    ExerciseAdapter!!.notifyDataSetChanged()
                     setupRestView()
                 } else {
                     finish()
+                    val intent = Intent(this@ExerciseActivity, FinishActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }.start()
