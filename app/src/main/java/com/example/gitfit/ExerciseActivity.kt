@@ -1,5 +1,6 @@
 package com.example.gitfit
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
@@ -15,28 +16,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gitfit.databinding.ActivityExerciseBinding
+import com.example.gitfit.databinding.DialogCustomBackConfirmationBinding
 import java.lang.Exception
 import java.util.Locale
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var binding: ActivityExerciseBinding? = null
-
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
     private var restTimerDuration: Long = 1
-
     private var exRestTimer: CountDownTimer? = null
     private var exRestProgress = 0
     private var exTimerDuration: Long = 1
-
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition: Int = -1
-
     private var tts: TextToSpeech? = null
-
     private var player: MediaPlayer? = null
-
     private var ExerciseAdapter: ExerciseStatusAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,16 +46,36 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         binding?.exerciseActivityToolbar?.setNavigationOnClickListener {
-            onBackPressed()// press back button of device
+//            onBackPressed()// press back button of device
+            backConfirmation()
         }
 
         exerciseList = Constants.defaultExerciseList()
 
         tts = TextToSpeech(this, this)
 
-
         setupRestView()
         setupExerciseStatusRecyclerView()
+    }
+
+    override fun onBackPressed() {
+        backConfirmation()
+    }
+
+    private fun backConfirmation() {
+        val customDialog = Dialog(this)
+        val dialogBinding = DialogCustomBackConfirmationBinding.inflate(layoutInflater)
+        customDialog.setContentView(dialogBinding.root)
+        customDialog.setCanceledOnTouchOutside(false)
+
+        dialogBinding.buttonYes.setOnClickListener {
+            this@ExerciseActivity.finish()
+            customDialog.dismiss()
+        }
+        dialogBinding.buttonNo.setOnClickListener {
+            customDialog.dismiss()
+        }
+        customDialog.show()
     }
 
     private fun setupExerciseStatusRecyclerView() {
@@ -71,7 +87,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setupRestView() {
-
         // Media Player
         try {
             val soundURI = Uri.parse("android.resource://com.example.gitfit/" + R.raw.press_start)
@@ -90,13 +105,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding?.upComingExerciseName?.visibility = View.VISIBLE
         binding?.upComingLabel?.visibility = View.VISIBLE
 
-
         if (restTimer != null) {
             restTimer?.cancel()
             restProgress = 0
         }
-
-
 
         binding?.upComingExerciseName?.text = exerciseList!![currentExercisePosition + 1].getName()
         setRestProgressBar()

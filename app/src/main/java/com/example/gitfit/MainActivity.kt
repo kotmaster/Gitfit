@@ -12,7 +12,7 @@ import com.example.gitfit.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var binding : ActivityMainBinding? =null
+    private var binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +24,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ExerciseActivity::class.java)
             startActivity(intent)
         }
-
+        binding?.BMIButton?.setOnClickListener {
+            val intent = Intent(this, BMIActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        binding =null
+        binding = null
     }
 }

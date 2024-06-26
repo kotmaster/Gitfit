@@ -30,4 +30,5 @@
     <string name="history">History</string>
     <string name="exercise_completed">EXERCISES COMPLETED</string>
     <string name="no_data_available">NO DATA AVAILABLE</string>
+    <string name="weight_in_pounds" />
 </resources>
