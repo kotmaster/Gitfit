@@ -1,4 +1,4 @@
-package com.example.gitfit
+package com.example.gitfit.models
 
 class ExerciseModel(
     private var id: Int,

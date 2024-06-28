@@ -1,4 +1,4 @@
-package com.example.gitfit
+package com.example.gitfit.activities
 
 import android.app.Dialog
 import android.content.Intent
@@ -9,12 +9,12 @@ import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gitfit.Constants
+import com.example.gitfit.models.ExerciseModel
+import com.example.gitfit.adapters.ExerciseStatusAdapter
+import com.example.gitfit.R
 import com.example.gitfit.databinding.ActivityExerciseBinding
 import com.example.gitfit.databinding.DialogCustomBackConfirmationBinding
 import java.lang.Exception

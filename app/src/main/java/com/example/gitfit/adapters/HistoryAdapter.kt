@@ -1,9 +1,8 @@
-package com.example.gitfit
+package com.example.gitfit.adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gitfit.databinding.ItemHistoryRowBinding
 

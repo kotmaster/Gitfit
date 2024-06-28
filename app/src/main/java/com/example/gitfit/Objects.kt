@@ -1,5 +1,7 @@
 package com.example.gitfit
 
+import com.example.gitfit.models.ExerciseModel
+
 
 class Constants {
     companion object {

@@ -10,7 +10,8 @@
     <color name="blackSecondary">#212121</color>
 
     <color name="colorPrimary">#B2212121</color>
-    <color name="colorAccent">#008F24</color>
+    <color name="colorAccent">#000000</color>
+    <!--    <color name="colorAccent">#008F24</color>-->
     <color name="highLighted">#C4C4C4</color>
     <color name="toolbarColorControlNormal">#000000</color>
     <color name="progressGrey">#D4DDE7</color>

@@ -1,13 +1,10 @@
-package com.example.gitfit
+package com.example.gitfit.activities
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.gitfit.R
 import com.example.gitfit.databinding.ActivityBmiBinding
 import java.math.BigDecimal
 import java.math.RoundingMode

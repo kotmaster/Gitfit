@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".HistoryActivity">
+    tools:context=".activities.HistoryActivity">
 
     <androidx.appcompat.widget.Toolbar
         app:layout_constraintTop_toTopOf="parent"

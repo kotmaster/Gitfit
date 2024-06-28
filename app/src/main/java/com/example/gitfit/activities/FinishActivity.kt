@@ -1,12 +1,12 @@
-package com.example.gitfit
+package com.example.gitfit.activities
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.gitfit.HistoryDao
+import com.example.gitfit.HistoryEntity
+import com.example.gitfit.application.WorkOutApp
 import com.example.gitfit.databinding.ActivityFinishBinding
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
